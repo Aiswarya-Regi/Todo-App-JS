@@ -14,7 +14,7 @@ if(taskList.length ===0){
     parent.appendChild(paragraph);
 }
 
-// add new task button
+
 const addTask =() =>{
     const name = document.getElementById('name').value;
     
@@ -37,7 +37,6 @@ document.getElementById("open__next__page").style.visibility = "hidden"
     
 }
 
-//  close button
 const closeTask =() =>{
     document.getElementById("open__next__page").style.visibility = "hidden"
 }
@@ -47,7 +46,7 @@ function openNextPage(){
     document.getElementById("open__next__page").style.visibility = "visible"
 }
     
-// adding tasks using flex
+    
 function addTaskonscreen(){
     const element = document.createElement('div');
     const id = taskList.slice(-1)[0].id;
@@ -66,7 +65,7 @@ function addTaskonscreen(){
     textDiv.style.height = "60px";
     textDiv.style.fontSize = "24px";
     textDiv.style.color = "brown"
-    const newObj={...taskList[taskList.length-1]}
+    const newObj = {...taskList[taskList.length-1]}
     textDiv.addEventListener('click',(e) => openItemDetails(e,newObj));
 
     textDiv.innerText = taskList[taskList.length-1].taskname;
@@ -76,7 +75,7 @@ function addTaskonscreen(){
     itemListDiv.style.minHeight = "230px";
     itemListDiv.style.height = "fit-content"
 
-    // button container
+
     const buttonContainer = document.createElement("div");
     buttonContainer.style.display = "flex";
     buttonContainer.style.width = "100%";
@@ -89,7 +88,6 @@ function addTaskonscreen(){
     buttonContainer.style.borderBottomRightRadius = "10px";
     buttonContainer.style.marginTop = "20px"
     
-    // add button
     const addImage = document.createElement("img");
     addImage.src="add-icon.png";
     addImage.setAttribute('class','addImage')
@@ -98,7 +96,7 @@ function addTaskonscreen(){
         addItemInTodo(e,selectedItemId);
     });
    
-    // delete button
+
     const deleteImage = document.createElement("img");
     deleteImage.src="delete-icon.jpg";
     deleteImage.setAttribute('class','addImage')
@@ -116,7 +114,7 @@ function addTaskonscreen(){
 
     
 }
-    // delete functionalities
+    
     const deleteTodoHandler = (e,id) =>{
         let indexTobeDeleted = 0;
         let parent = document.getElementById("parent")
@@ -142,8 +140,6 @@ indexTobeDeleted = i;
         document.getElementById("root__id").style.visibility = "hidden"
 
     }
-
-    // adding item inside flex
     const addItemInTodo = (e,id,isvalid) =>{
         document.getElementById("open__item__page").style.visibility = "visible"
         if(isvalid){
@@ -189,7 +185,8 @@ indexTobeDeleted = i;
         statusSpan.style.color=  "white"
         statusSpan.style.padding = "5px"
         statusSpan.style.borderRadius = "10px"
-        statusSpan.addEventListener('click', (e) => markAsDoneHandler(e,itemListDivId,selectedItemId,item__name))
+        let selectedId = selectedItemId;
+        statusSpan.addEventListener('click', (e) => markAsDoneHandler(e,itemListDivId,selectedId ,item__name))
 
 
         itemDiv.appendChild(textSpan);
@@ -199,7 +196,8 @@ indexTobeDeleted = i;
         }
 
         const itemdivCloneNode = itemDiv.cloneNode();
-        let newId = selectedItemId + "itemDiv" + length;
+        let cloneLength = (document.getElementById("parent").children[indexTobeDeleted]?.children[1]?.children?.length + 1) || 1;
+        let newId = selectedItemId + "itemDiv" + cloneLength;
         itemdivCloneNode.id = newId;
        
         const textSpanCloneNode = textSpan.cloneNode();
@@ -207,7 +205,7 @@ indexTobeDeleted = i;
        
         const statusSpanCloneNode = statusSpan.cloneNode();
         statusSpanCloneNode.innerText = "Mark Done"
-        statusSpanCloneNode.addEventListener('click', (e) => markAsDoneHandler(e,newId,selectedItemId,item__name))
+        statusSpanCloneNode.addEventListener('click', (e) => markAsDoneHandler(e,newId,selectedId,item__name))
         itemdivCloneNode.appendChild(textSpanCloneNode);
         itemdivCloneNode.appendChild(statusSpanCloneNode);
        
@@ -216,7 +214,7 @@ indexTobeDeleted = i;
         document.getElementById("open__item__page").style.visibility = "hidden"
 
     }
-    // mark as done
+
     const markAsDoneHandler = (e,id,parentId,name) =>{
         if(isInside){
             if(id.includes("clone")){

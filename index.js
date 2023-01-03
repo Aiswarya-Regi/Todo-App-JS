@@ -222,7 +222,7 @@ indexTobeDeleted = i;
             if(id.includes("clone")){
                 let withOutcloneId = id.split("clone")[0];
                 const parent = document.getElementById(withOutcloneId);
-                parent.removeChild(parent.children[1]);
+               
                 const textSpan = parent.childNodes[0];
                 textSpan.style.textDecoration = "line-through";
                 textSpan.style.textDecorationColor = "red";

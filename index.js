@@ -230,7 +230,7 @@ indexTobeDeleted = i;
             }
         }
         const parent = document.getElementById(id);
-        parent.removeChild(parent.children[1]);
+        
         const textSpan = parent.childNodes[0];
         textSpan.style.textDecoration = "line-through";
         textSpan.style.textDecorationColor = "red";
